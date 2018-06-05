@@ -47,7 +47,7 @@ const getTasks = () => {
 
     // append li to ul
     taskList.appendChild(li);
-  })
+  });
 }
 
 
@@ -55,34 +55,34 @@ const getTasks = () => {
 const addTask = (e) => {
   if (taskInput.value === '') {
     alert('Please input a task')
+  } else {
+    // create li element
+    const li = document.createElement('li')
+    // add class to li element
+    li.className = 'collection-item';
+    // create text node and append to li
+    li.appendChild(document.createTextNode(taskInput.value))
+    // create new link element
+    const link = document.createElement('a');
+    // add class
+    link.className = 'delete-item secondary-content';
+    // add icon html
+    link.innerHTML = '<i class="fa fa-remove"></i>';
+    // append link to li
+    li.appendChild(link);
+
+    // append li to ul
+    taskList.appendChild(li);
+
+    // store task in local storage
+    storeTaskInLocalStorage(taskInput.value);
+
+    // clear input
+    taskInput.value = '';
+
+    // prevent form from submitting
+    e.preventDefault();
   }
-
-  // create li element
-  const li = document.createElement('li')
-  // add class to li element
-  li.className = 'collection-item';
-  // create text node and append to li
-  li.appendChild(document.createTextNode(taskInput.value))
-  // create new link element
-  const link = document.createElement('a');
-  // add class
-  link.className = 'delete-item secondary-content';
-  // add icon html
-  link.innerHTML = '<i class="fa fa-remove"></i>';
-  // append link to li
-  li.appendChild(link);
-
-  // append li to ul
-  taskList.appendChild(li);
-
-  // store task in local storage
-  storeTaskInLocalStorage(taskInput.value);
-
-  // clear input
-  taskInput.value = '';
-
-  // prevent form from submitting
-  e.preventDefault();
 }
 
 // Store tasks
